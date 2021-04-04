@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function Greeting() {
+  return (
+    // nesting of components inside another component
+    <div>
+      <Person />
+      <Message />
+    </div>
+  );
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// component_1
+const Person = () => {
+  return <h1>John Doe</h1>;
+};
+
+// component_2
+function Message() {
+  return <p>I am a student at JS-U</p>;
+}
+
+ReactDOM.render(<Greeting />, document.getElementById("root"));
