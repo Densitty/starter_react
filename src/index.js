@@ -27,19 +27,10 @@ const books = [
 ];
 
 function BookList() {
-  /* <Book
-            key={index}
-            image={book.image}
-            title={book.title}
-            name={book.name}
-  /> */
   return (
     <section className="booklist">
       {books.map((book, index) => {
         /* console.log(book); */
-        /* book below is prop.book while the {book} is each iterated item */
-        // return <Book book={book} key={index} />;
-        /* alternatively, instead of doing the above and destructuring from the Book component with props.book, we can destructure inside here as below */
         return <Book {...book} key={index} />;
       })}
     </section>
@@ -47,7 +38,9 @@ function BookList() {
 }
 
 const Book = (props) => {
-  console.log(props);
+  const complexExample = (props) => {
+    console.log(props.name);
+  };
   return (
     <article className="book">
       <Image image={props.image} />
@@ -56,12 +49,20 @@ const Book = (props) => {
       <p>{`${
         props.numbers_sold ? props.numbers_sold + " copies sold." : ""
       }`}</p>
+      <button type="button" onClick={() => complexExample(props)}>
+        more complex example
+      </button>
     </article>
   );
 };
 
 const Image = (props) => {
-  return <img src={props.image} alt="book" />;
+  // to setup an even, we need an attribute and an eventHandler
+  // onClick is the attribute, clickHandler is the eventHandler
+  const clickHandler = () => {
+    console.log("Thanks for checking out my list");
+  };
+  return <img src={props.image} alt="book" onClick={clickHandler} />;
 };
 
 const Author = (props) => {
@@ -73,7 +74,7 @@ const Author = (props) => {
 };
 
 const Title = (props) => {
-  return <h1>{props.title}</h1>;
+  return <h1 onClick={() => console.log(props.title)}>{props.title}</h1>;
 };
 
 ReactDOM.render(<BookList />, document.getElementById("root"));
