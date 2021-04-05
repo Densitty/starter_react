@@ -4,26 +4,44 @@ import ReactDOM from "react-dom";
 // to add CSS
 import "./index.css";
 
-const myBook = {
-  name: "Victoria Jamieson",
-  image:
-    "https://images-na.ssl-images-amazon.com/images/I/51rm2Y8L0ML._SX331_BO1,204,203,200_.jpg",
-  title: "When Stars Are Scattered",
-};
+const books = [
+  {
+    name: "Victoria Jamieson",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/51rm2Y8L0ML._SX331_BO1,204,203,200_.jpg",
+    title: "When Stars Are Scattered",
+  },
+  {
+    name: "Kat Leyh",
+    title: "Snapdragon",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/51ieSUPgKyL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
+    numbers_sold: 25000,
+  },
+  {
+    name: "Lauren Tarshis",
+    title: "I Survived the Battle of Gettysburg, 1863",
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/51qILmvdZmL._AC_UL200_SR200,200_.jpg",
+  },
+];
 
 function BookList() {
+  /* <Book
+            key={index}
+            image={book.image}
+            title={book.title}
+            name={book.name}
+  /> */
   return (
     <section className="booklist">
-      <Book name={myBook.name} title={myBook.title} image={myBook.image}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae,
-        veritatis. Rem molestias neque libero iste.
-      </Book>
-      <Book
-        name="Kat Leyh"
-        title="Snapdragon"
-        image="https://images-na.ssl-images-amazon.com/images/I/51ieSUPgKyL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
-        numbers_sold={25000}
-      />
+      {books.map((book, index) => {
+        /* console.log(book); */
+        /* book below is prop.book while the {book} is each iterated item */
+        // return <Book book={book} key={index} />;
+        /* alternatively, instead of doing the above and destructuring from the Book component with props.book, we can destructure inside here as below */
+        return <Book {...book} key={index} />;
+      })}
     </section>
   );
 }
@@ -38,7 +56,6 @@ const Book = (props) => {
       <p>{`${
         props.numbers_sold ? props.numbers_sold + " copies sold." : ""
       }`}</p>
-      <p>{props.children}</p>
     </article>
   );
 };
